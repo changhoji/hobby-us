@@ -1,4 +1,7 @@
-import Navbar from "../Navbar";
+import { fbApp, fbAuth } from "@/pages/_app";
+import { User } from "@firebase/auth";
+import { useEffect, useState } from "react";
+import Header from "../Header";
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -7,7 +10,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
     return (
         <>
-            <Navbar />
+            <Header />
             <div>{children}</div>
         </>
     );
