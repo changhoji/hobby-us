@@ -1,4 +1,3 @@
-import useAuth from "@/hooks/useAuth";
 import { fbAuth } from "@/pages/_app";
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
