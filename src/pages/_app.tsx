@@ -2,6 +2,7 @@ import Layout from "@/components/layouts/Layout";
 import type { AppProps } from "next/app";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
@@ -22,3 +23,4 @@ const firebaseConfig = {
 
 export const fbApp = initializeApp(firebaseConfig);
 export const fbAuth = getAuth(fbApp);
+export const fbDB = getFirestore(fbApp);

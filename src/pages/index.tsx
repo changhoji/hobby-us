@@ -1,4 +1,5 @@
 import AuthButton from "@/components/buttons/AuthButton";
+import { fbDB } from "./_app";
 
 export default function Home() {
     return (
