@@ -4,7 +4,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function AuthButton() {
     const [user, loading, error] = useAuthState(fbAuth);
-    console.log(user);
 
     const handleButtonClick = () => {
         if (user) {
