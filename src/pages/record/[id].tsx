@@ -1,22 +1,19 @@
-import { collection, doc, getDoc } from "firebase/firestore";
-import { GetServerSideProps } from "next";
+import { Record } from "@/types/firestore/record";
+import { doc, getDoc } from "firebase/firestore";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { fbDB } from "../_app";
 
 interface Props {
-    title: string;
-    content: string;
-    uid: string;
+    record: Record;
 }
 
-export default function Post({ title, content, uid }: Props) {
+export default function Post({ record }: Props) {
     return (
         <div>
             <Link href="/record">돌아가기</Link>
-            <h1>{title}</h1>
-            <p>{content}</p>
-            <i>by {uid}</i>
+            <h1>{record.title}</h1>
+            <p>{record.content}</p>
+            <i>by {record.uid}</i>
         </div>
     );
 }

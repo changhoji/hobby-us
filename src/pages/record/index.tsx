@@ -1,31 +1,30 @@
 import RecordPreview from "@/components/RecordPreview";
+import { Record, recordConverter } from "@/types/firestore/record";
 import {
     collection,
     DocumentData,
     getDocs,
     QueryDocumentSnapshot,
     Timestamp,
+    query,
+    orderBy,
 } from "firebase/firestore";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { fbDB } from "../_app";
 
-interface Record {
-    title: string;
-    content: string;
-    uid: string;
-    timestamp: Timestamp;
-}
-
 export default function RecordHome() {
-    const [records, setRecords] = useState<
-        QueryDocumentSnapshot<DocumentData>[]
-    >([]);
+    const [records, setRecords] = useState<QueryDocumentSnapshot<Record>[]>([]);
 
     const getRecords = async () => {
-        const querySnapshot = await getDocs(collection(fbDB, "record"));
+        const recordRef = collection(fbDB, "record").withConverter(
+            recordConverter
+        );
+        const q = query(recordRef, orderBy("timestamp", "desc"));
+        const querySnapshot = await getDocs(q);
+
         querySnapshot.forEach((doc) => {
-            setRecords((prev: any) => [...prev, doc]);
+            setRecords((prev) => [...prev, doc]);
         });
     };
     useEffect(() => {
