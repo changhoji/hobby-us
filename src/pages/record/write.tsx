@@ -1,4 +1,5 @@
 import styles from "@/styles/editor.module.css";
+import { Record } from "@/types/firestore/record";
 import { addDoc, serverTimestamp, collection } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -16,20 +17,27 @@ export default function WriteRecord() {
         e.preventDefault();
 
         if (!user) {
-            alert("do login first");
+            alert("로그인이 필요한 기능입니다.");
+            return;
+        }
+        if (title === "" || content === "") {
+            alert("제목과 내용을 입력해주세요.");
             return;
         }
 
         const recordObj = {
             title,
             content,
-            timestamp: serverTimestamp(),
             uid: user.uid,
+            userName: user.displayName,
+            timestamp: serverTimestamp(),
         };
 
         const data = await addDoc(collection(fbDB, "record"), recordObj);
         router.push(`/record/${data.id}`);
     };
+
+    console.log(user);
     return (
         <div id="editor" className={styles.editor}>
             <form onSubmit={handleSubmit}>

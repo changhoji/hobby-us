@@ -11,6 +11,7 @@ export class Record {
         readonly title: string,
         readonly content: string,
         readonly uid: string,
+        readonly userName: string,
         readonly timestamp: Timestamp
     ) {}
 }
@@ -21,6 +22,7 @@ export const recordConverter = {
             title: record.title,
             content: record.content,
             uid: record.uid,
+            userName: record.userName,
             timestamp: record.timestamp,
         };
     },
@@ -29,7 +31,13 @@ export const recordConverter = {
         options: SnapshotOptions
     ): Record {
         const data = snapshot.data(options)!;
-        return new Record(data.title, data.content, data.uid, data.timestamp);
+        return new Record(
+            data.title,
+            data.content,
+            data.uid,
+            data.userName,
+            data.timestamp
+        );
     },
 };
 

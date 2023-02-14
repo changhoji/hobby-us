@@ -1,5 +1,5 @@
 import { Record } from "@/types/firestore/record";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, QueryDocumentSnapshot } from "firebase/firestore";
 import Link from "next/link";
 import { fbDB } from "../_app";
 
@@ -13,7 +13,7 @@ export default function Post({ record }: Props) {
             <Link href="/record">돌아가기</Link>
             <h1>{record.title}</h1>
             <p>{record.content}</p>
-            <i>by {record.uid}</i>
+            <i>by {record.userName}</i>
         </div>
     );
 }
@@ -29,6 +29,7 @@ export const getServerSideProps: any = async (context: any) => {
         props: {
             title: docSnap.data().title,
             content: docSnap.data().content,
+            userName: docSnap.data().userName,
             uid: docSnap.data().uid,
         },
     };
