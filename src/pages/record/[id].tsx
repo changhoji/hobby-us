@@ -49,7 +49,7 @@ export default function Post() {
 
     useEffect(() => {
         getPost();
-    }, []);
+    });
 
     return (
         <div>
