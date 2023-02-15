@@ -1,36 +1,51 @@
-import { Record } from "@/types/firestore/record";
-import { doc, getDoc, QueryDocumentSnapshot } from "firebase/firestore";
+import { Record, recordConverter } from "@/types/firestore/record";
+import {
+    doc,
+    DocumentSnapshot,
+    getDoc,
+    QueryDocumentSnapshot,
+} from "firebase/firestore";
 import Link from "next/link";
 import { fbDB } from "../_app";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 interface Props {
     record: Record;
 }
 
-export default function Post({ record }: Props) {
+export default function Post() {
+    const router = useRouter();
+    const id = router.query.id;
+
+    const [post, setPost] = useState<DocumentSnapshot<Record> | null>(null);
+
+    const getPost = async () => {
+        if (typeof id === "string") {
+            const docRef = doc(fbDB, "record", id).withConverter(
+                recordConverter
+            );
+            const docSnap = await getDoc(docRef);
+            if (docSnap !== undefined) {
+                setPost(docSnap);
+            }
+        }
+    };
+
+    useEffect(() => {
+        getPost();
+    }, []);
+
     return (
         <div>
             <Link href="/record">돌아가기</Link>
-            <h1>{record.title}</h1>
-            <p>{record.content}</p>
-            <i>by {record.userName}</i>
+            {post && (
+                <>
+                    <h1>{post.data().title}</h1>
+                    <p>{post.data().content}</p>
+                    <i>by {post.data().userName}</i>
+                </>
+            )}
         </div>
     );
 }
-
-export const getServerSideProps: any = async (context: any) => {
-    const docRef = doc(fbDB, "record", context.params.id);
-    console.log(fbDB);
-    const docSnap = await getDoc(docRef);
-
-    if (!docSnap.exists()) return;
-
-    return {
-        props: {
-            title: docSnap.data().title,
-            content: docSnap.data().content,
-            userName: docSnap.data().userName,
-            uid: docSnap.data().uid,
-        },
-    };
-};
