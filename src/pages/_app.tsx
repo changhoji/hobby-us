@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
@@ -24,3 +25,4 @@ const firebaseConfig = {
 export const fbApp = initializeApp(firebaseConfig);
 export const fbAuth = getAuth(fbApp);
 export const fbDB = getFirestore(fbApp);
+export const fbStorage = getStorage(fbApp);

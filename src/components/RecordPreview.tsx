@@ -1,19 +1,27 @@
-import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import { Record } from "@/types/firestore/record";
+import {
+    DocumentData,
+    QueryDocumentSnapshot,
+    Timestamp,
+} from "firebase/firestore";
 import Link from "next/link";
+import styles from "@/styles/RecordPreview.module.css";
 
 interface Props {
-    // record: QueryDocumentSnapshot<DocumentData>;
+    record: QueryDocumentSnapshot<Record>;
 }
 
-export default function RecordPreview({ record }: any) {
+export default function RecordPreview({ record }: Props) {
     const data = record.data();
     return (
-        <Link href={`/record/${record.id}`}>
-            <div>
-                <h1>{data.title}</h1>
-                <p>{data.content}</p>
-                <i>by {data.uid}</i>
-            </div>
-        </Link>
+        <div className={styles.post}>
+            <Link href={`/record/${record.id}`}>
+                <div>
+                    <h1>{data.title}</h1>
+                    <p>{data.content}</p>
+                    <i>by {data.userName}</i>
+                </div>
+            </Link>
+        </div>
     );
 }
