@@ -44,6 +44,7 @@ export default function Post() {
                     <h1>{post.data().title}</h1>
                     <p>{post.data().content}</p>
                     <i>by {post.data().userName}</i>
+                    <img src={post.data().photoURL} alt="이미지" />
                 </>
             )}
         </div>

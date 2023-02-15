@@ -30,6 +30,7 @@ export default function WriteRecord() {
             content,
             uid: user.uid,
             userName: user.displayName,
+            photoURL: user.photoURL,
             timestamp: serverTimestamp(),
         };
 

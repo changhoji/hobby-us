@@ -12,6 +12,7 @@ export class Record {
         readonly content: string,
         readonly uid: string,
         readonly userName: string,
+        readonly photoURL: string,
         readonly timestamp: Timestamp
     ) {}
 }
@@ -23,6 +24,7 @@ export const recordConverter = {
             content: record.content,
             uid: record.uid,
             userName: record.userName,
+            photoURL: record.photoURL,
             timestamp: record.timestamp,
         };
     },
@@ -36,6 +38,7 @@ export const recordConverter = {
             data.content,
             data.uid,
             data.userName,
+            data.photoURL,
             data.timestamp
         );
     },
