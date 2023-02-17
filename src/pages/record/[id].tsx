@@ -48,8 +48,8 @@ export default function Post() {
     };
 
     useEffect(() => {
-        getPost();
-    }, []);
+        if (user) getPost();
+    });
 
     return (
         <div>

@@ -11,10 +11,12 @@ import {
 } from "firebase/firestore";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { fbDB } from "../_app";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { fbAuth, fbDB } from "../_app";
 
 export default function RecordHome() {
     const [records, setRecords] = useState<QueryDocumentSnapshot<Record>[]>([]);
+    const [user, loading, error] = useAuthState(fbAuth);
 
     const getRecords = async () => {
         const recordRef = collection(fbDB, "record").withConverter(
@@ -22,14 +24,15 @@ export default function RecordHome() {
         );
         const q = query(recordRef, orderBy("timestamp", "desc"));
         const querySnapshot = await getDocs(q);
+        console.log("execute getDocs");
 
         querySnapshot.forEach((doc) => {
             setRecords((prev) => [...prev, doc]);
         });
     };
     useEffect(() => {
-        getRecords();
-    }, []);
+        if (user) getRecords();
+    });
 
     console.log(records);
 
