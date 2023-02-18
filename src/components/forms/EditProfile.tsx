@@ -29,7 +29,7 @@ export default function EditProfileForm() {
     const router = useRouter();
     const [value, setValue] = useState<File | null>(null);
     const [user, loading, error] = useAuthState(fbAuth);
-    const [newName, setNewName] = useState<string>(user.displayName);
+    const [newName, setNewName] = useState<string>("");
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
