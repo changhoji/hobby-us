@@ -33,7 +33,6 @@ export default function Post() {
             if (docSnap !== undefined) {
                 setPost(docSnap);
             }
-            console.log("user: " + user.uid);
         }
     };
 
@@ -62,7 +61,7 @@ export default function Post() {
                     <i>by {post.data().userName}</i>
                 </>
             )}
-            {post && post.data().uid === user.uid && (
+            {post && user && post.data().uid === user.uid && (
                 <p>
                     <button onClick={handleRemoveClick}>삭제</button>
                 </p>
