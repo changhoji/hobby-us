@@ -79,7 +79,7 @@ export default function EditProfileForm() {
         }
 
         alert("수정되었습니다.");
-        router.push("/my");
+        router.push("/record");
     };
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
