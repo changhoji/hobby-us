@@ -31,8 +31,8 @@ export default function RecordHome() {
         });
     };
     useEffect(() => {
-        if (user) getRecords();
-    });
+        getRecords();
+    }, []);
 
     console.log(records);
 
