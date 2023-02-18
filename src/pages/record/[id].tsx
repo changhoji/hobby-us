@@ -29,6 +29,7 @@ export default function Post() {
                 recordConverter
             );
             const docSnap = await getDoc(docRef);
+            console.log("getDoc");
             if (docSnap !== undefined) {
                 setPost(docSnap);
             }
@@ -48,8 +49,8 @@ export default function Post() {
     };
 
     useEffect(() => {
-        if (user) getPost();
-    });
+        getPost();
+    }, []);
 
     return (
         <div>
