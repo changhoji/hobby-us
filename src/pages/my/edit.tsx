@@ -1,11 +1,9 @@
-import EditUserNameForm from "@/components/forms/EditUserName";
-import EditUserPhotoForm from "@/components/forms/EditUserPhoto";
+import EditProfileForm from "@/components/forms/EditProfile";
 
 export default function ProfileUpdate() {
     return (
         <>
-            <EditUserPhotoForm />
-            <EditUserNameForm />
+            <EditProfileForm />
         </>
     );
 }
