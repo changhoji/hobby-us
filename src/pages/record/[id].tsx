@@ -57,7 +57,7 @@ export default function Post() {
             {post && (
                 <>
                     <h1>{post.data().title}</h1>
-                    <p>{post.data().content}</p>
+                    <article>{post.data().content}</article>
                     <i>by {post.data().userName}</i>
                 </>
             )}

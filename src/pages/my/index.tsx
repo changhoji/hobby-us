@@ -19,7 +19,9 @@ export default function MyPage() {
                     />
                 </>
             )}
-            <Link href="/my/edit">프로필 수정</Link>
+            <Link href="/my/edit">
+                <button>프로필 수정</button>
+            </Link>
         </>
     );
 }

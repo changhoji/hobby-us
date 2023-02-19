@@ -38,7 +38,9 @@ export default function RecordHome() {
 
     return (
         <div>
-            <Link href="/record/write">글쓰기</Link>
+            <Link href="/record/write">
+                <button>글쓰기</button>
+            </Link>
             <div id="records">
                 {records.map((record) => (
                     <RecordPreview key={record.id} record={record} />

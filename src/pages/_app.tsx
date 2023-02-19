@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import "@/styles/global.css";
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
