@@ -20,7 +20,7 @@ export default function RecordPreview({ record }: Props) {
             <Link href={`/record/${record.id}`}>
                 <div>
                     <h1>{data.title}</h1>
-                    <article>{data.content}</article>
+                    <article className={styles.content}>{data.content}</article>
                     <i>by {data.userName}</i>
                     {data.photoURL !== "" && (
                         <Image

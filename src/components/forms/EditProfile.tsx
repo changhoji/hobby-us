@@ -79,7 +79,6 @@ export default function EditProfileForm() {
         }
 
         alert("수정되었습니다.");
-        router.push("/record");
     };
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -92,11 +91,12 @@ export default function EditProfileForm() {
         console.log(file);
     };
 
-    const updateProfileInfo = (updateData: UpdateData) => {
-        updateProfile(user, {
+    const updateProfileInfo = async (updateData: UpdateData) => {
+        await updateProfile(user, {
             displayName: updateData.userName,
             photoURL: updateData.photoURL,
         });
+        router.push("/my");
 
         const ref = collection(fbDB, "record").withConverter(recordConverter);
         const q = query(ref, where("uid", "==", user.uid));

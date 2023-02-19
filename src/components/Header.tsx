@@ -6,11 +6,6 @@ export default function Header() {
             <header>
                 <Navbar />
             </header>
-            <style jsx>{`
-                header {
-                    border: 0.2rem solid gray;
-                }
-            `}</style>
         </>
     );
 }
