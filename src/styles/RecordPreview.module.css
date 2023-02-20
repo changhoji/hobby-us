@@ -3,3 +3,8 @@
     padding: 1rem;
     margin: 0.5rem;
 }
+
+.content {
+    height: 8rem;
+    overflow: hidden;
+}
