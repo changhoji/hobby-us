@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { fbAuth, fbDB, fbStorage } from "@/pages/_app";
 import { uuidv4 } from "@firebase/util";
 import {
+    deleteObject,
     getDownloadURL,
     ref,
     uploadBytesResumable,
@@ -68,6 +69,9 @@ export default function EditProfileForm() {
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then(
                         (downloadURL) => {
+                            const deleteRef = ref(fbStorage, user.photoURL);
+                            deleteObject(deleteRef);
+
                             updateProfileInfo({
                                 userName: newName,
                                 photoURL: downloadURL,
