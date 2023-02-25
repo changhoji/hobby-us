@@ -1,0 +1,16 @@
+.container {
+    margin-top: 4rem;
+    background-color: #c7e4fc;
+
+    height: 30rem;
+}
+
+.previews {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.previews > * {
+    margin: 1rem;
+}

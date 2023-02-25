@@ -2,5 +2,12 @@
     display: flex;
     justify-content: space-around;
     padding: 1rem;
-    border: 0.08rem solid black;
+    font-weight: bold;
+    font-size: 1.3rem;
+
+    padding: 2rem;
+}
+
+.title {
+    font-size: 1.5rem;
 }

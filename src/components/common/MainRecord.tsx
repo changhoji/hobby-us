@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import MainRecordPreview from "./MainRecordPreview";
+import styles from "@/styles/MainRecord.module.css";
 
 export default function MainRecord() {
     const [records, setRecords] = useState<QueryDocumentSnapshot<Record>[]>([]);
@@ -29,14 +30,12 @@ export default function MainRecord() {
 
     return (
         <>
-            <div className="container">
-                <p>✨기록해요✨</p>
-                <div className="previews">
+            <div className={styles.container}>
+                <div className={styles.previews}>
                     {records.map((record) => (
                         <MainRecordPreview key={record.id} record={record} />
                     ))}
                 </div>
-                <p>✨기록해요✨</p>
             </div>
             <style jsx>{`
                 .container {
@@ -46,10 +45,6 @@ export default function MainRecord() {
                 .previews {
                     display: flex;
                     justify-content: center;
-                }
-                p {
-                    text-align: right;
-                    vertical-align: middle;
                 }
             `}</style>
         </>

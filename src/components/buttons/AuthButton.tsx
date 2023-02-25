@@ -54,6 +54,12 @@ export default function AuthButton() {
                     </svg>
                 )}
             </button>
+            <style jsx>{`
+                button {
+                    border: none;
+                    background-color: white;
+                }
+            `}</style>
         </>
     );
 }
