@@ -11,6 +11,7 @@ import { fbAuth, fbDB } from "../_app";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Image from "next/image";
 
 interface Props {
     record: Record;
@@ -61,6 +62,18 @@ export default function Post() {
                     <i>by {post.data().userName}</i>
                 </>
             )}
+            {post &&
+                post
+                    .data()
+                    .photos.map((url) => (
+                        <Image
+                            key={url}
+                            src={url}
+                            alt="image"
+                            width="300"
+                            height="300"
+                        ></Image>
+                    ))}
             {post && user && post.data().uid === user.uid && (
                 <p>
                     <button onClick={handleRemoveClick}>삭제</button>
