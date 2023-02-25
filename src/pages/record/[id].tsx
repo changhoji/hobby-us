@@ -60,6 +60,12 @@ export default function Post() {
                     <h1>{post.data().title}</h1>
                     <article>{post.data().content}</article>
                     <i>by {post.data().userName}</i>
+                    <Image
+                        src={post.data().photoURL}
+                        alt="profileImage"
+                        width="100"
+                        height="100"
+                    />
                 </>
             )}
             {post &&
