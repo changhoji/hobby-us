@@ -2,6 +2,7 @@ import { Record } from "@/types/firestore/record";
 import { QueryDocumentSnapshot } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "@/styles/MainRecordPreview.module.css";
 
 interface Props {
     record: QueryDocumentSnapshot<Record>;
@@ -11,10 +12,14 @@ export default function MainRecordPreview({ record }: Props) {
     const data = record.data();
 
     return (
-        <div>
+        <div className={styles.preview}>
             <Link href={`/record/${record.id}`}>
                 <div id="imageContainer">
-                    <Image src={data.thumbnail} alt="image" fill />
+                    <img
+                        src={data.thumbnail}
+                        alt="image"
+                        className={styles.image}
+                    />
                 </div>
             </Link>
             <style jsx>{`
