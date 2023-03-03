@@ -1,0 +1,9 @@
+.image {
+    width: 15rem;
+}
+
+.preview {
+    margin: 1rem;
+    overflow: hidden;
+    width: 15rem;
+}

@@ -13,7 +13,9 @@ export class Record {
         readonly uid: string,
         readonly userName: string,
         readonly photoURL: string,
-        readonly timestamp: Timestamp
+        readonly timestamp: Timestamp,
+        readonly photos: string[],
+        readonly thumbnail: string
     ) {}
 }
 
@@ -26,6 +28,8 @@ export const recordConverter = {
             userName: record.userName,
             photoURL: record.photoURL,
             timestamp: record.timestamp,
+            photos: record.photos,
+            thumbnail: record.thumbnail,
         };
     },
     fromFirestore(
@@ -39,7 +43,9 @@ export const recordConverter = {
             data.uid,
             data.userName,
             data.photoURL,
-            data.timestamp
+            data.timestamp,
+            data.photos,
+            data.thumbnail
         );
     },
 };

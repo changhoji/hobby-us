@@ -1,14 +1,23 @@
 import styles from "@/styles/editor.module.css";
 import { Record } from "@/types/firestore/record";
+import { uuidv4 } from "@firebase/util";
 import { addDoc, serverTimestamp, collection } from "firebase/firestore";
+import {
+    getDownloadURL,
+    ref,
+    uploadBytes,
+    uploadBytesResumable,
+} from "firebase/storage";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { fbAuth, fbDB } from "../_app";
+import { fbAuth, fbDB, fbStorage } from "../_app";
 
 export default function WriteRecord() {
     const [content, setContent] = useState<string>("");
     const [title, setTitle] = useState<string>("");
+    const [images, setImages] = useState<File[]>([]);
 
     const [user, loading, error] = useAuthState(fbAuth);
     const router = useRouter();
@@ -25,6 +34,23 @@ export default function WriteRecord() {
             return;
         }
 
+        if (images.length === 0) {
+            alert("이미지를 추가해주세요.");
+            return;
+        }
+
+        let photoURLs: string[] = [];
+
+        for (const image of images) {
+            const storageRef = ref(
+                fbStorage,
+                `images/record/${title}/${uuidv4()}`
+            );
+            const uploadTask = await uploadBytes(storageRef, image);
+            const downloadURL = await getDownloadURL(storageRef);
+            photoURLs = [...photoURLs, downloadURL];
+        }
+
         const recordObj = {
             title,
             content,
@@ -32,6 +58,8 @@ export default function WriteRecord() {
             userName: user.displayName,
             photoURL: user.photoURL,
             timestamp: serverTimestamp(),
+            photos: photoURLs,
+            thumbnail: photoURLs[0],
         };
 
         const data = await addDoc(collection(fbDB, "record"), recordObj);
@@ -57,6 +85,25 @@ export default function WriteRecord() {
                     rows={10}
                     cols={30}
                 ></textarea>
+                <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={(e) => {
+                        setImages(Array.from(e.target.files));
+                    }}
+                />
+                <div id="previewImages">
+                    {images.map((image) => (
+                        <Image
+                            key={URL.createObjectURL(image)}
+                            width="200"
+                            height="200"
+                            src={URL.createObjectURL(image)}
+                            alt="preview"
+                        ></Image>
+                    ))}
+                </div>
                 <input type="submit" value="작성" />
             </form>
         </div>
