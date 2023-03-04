@@ -1,16 +1,21 @@
 .container {
     margin-top: 4rem;
     background-color: #c7e4fc;
-
-    height: 30rem;
 }
 
 .previews {
+    position: relative;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-}
-.previews > * {
-    margin: 1rem;
+    margin: 0 auto;
+
+    padding: 2rem;
+
+    padding-top: 5%;
+    padding-bottom: 5%;
+    max-width: 80rem;
+
+    align-self: center;
 }

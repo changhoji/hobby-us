@@ -3,6 +3,7 @@ import { QueryDocumentSnapshot } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "@/styles/MainRecordPreview.module.css";
+import { useRouter } from "next/router";
 
 interface Props {
     record: QueryDocumentSnapshot<Record>;
@@ -10,18 +11,26 @@ interface Props {
 
 export default function MainRecordPreview({ record }: Props) {
     const data = record.data();
+    const router = useRouter();
 
     return (
-        <div className={styles.preview}>
-            <Link href={`/record/${record.id}`}>
-                <div id="imageContainer">
-                    <img
-                        src={data.thumbnail}
-                        alt="image"
-                        className={styles.image}
-                    />
-                </div>
-            </Link>
+        <>
+            <div
+                className={styles.preview}
+                onClick={(e) => {
+                    router.push(`/record/${record.id}`);
+                }}
+            >
+                <img
+                    src={
+                        data.thumbnail !== undefined
+                            ? data.thumbnail
+                            : "/assets/images/background.jpg"
+                    }
+                    alt="image"
+                    className={styles.image}
+                />
+            </div>
             <style jsx>{`
                 #imageContainer {
                     position: relative;
@@ -29,6 +38,6 @@ export default function MainRecordPreview({ record }: Props) {
                     height: 12rem;
                 }
             `}</style>
-        </div>
+        </>
     );
 }
