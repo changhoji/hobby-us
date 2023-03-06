@@ -20,6 +20,7 @@ export default function WriteRecord() {
     const [images, setImages] = useState<File[]>([]);
     const [thumbnail, setThumbnail] = useState<number>(0);
     const [classNames, setClassNames] = useState<string[]>([]);
+    const [value, setValue] = useState<number>(0);
 
     const [user, loading, error] = useAuthState(fbAuth);
     const router = useRouter();
@@ -75,22 +76,21 @@ export default function WriteRecord() {
         //     return;
         // }
 
+        setValue((prev) => prev + 1);
+
         const newSelected = Number(e.target.dataset.index);
-        const newClassNames = classNames;
 
-        console.log(e.target.dataset.index);
+        setClassNames((prev) => {
+            let temp: string[] = prev;
 
-        for (let i = 0; i < classNames.length; i++) {
-            if (newClassNames[i] === "selected") {
-                newClassNames[i] = "unselected";
+            for (let i = 0; i < classNames.length; i++) {
+                if (temp[i] === "selected") temp[i] = "unselected";
+                if (i === newSelected) temp[i] = "selected";
             }
 
-            if (i === newSelected) newClassNames[i] = "selected";
-        }
-
-        setClassNames(newClassNames);
-
-        console.log(classNames);
+            return temp;
+        });
+        setThumbnail(newSelected);
     };
 
     console.log(user);
@@ -128,8 +128,9 @@ export default function WriteRecord() {
                     />
                     <div id="previewImages">
                         {images.map((image, index) => (
-                            <div key={index} className={classNames.at(index)}>
+                            <div key={index}>
                                 <img
+                                    className={classNames[index]}
                                     onClick={(e) => {
                                         handleImageClick(e);
                                     }}
@@ -142,7 +143,6 @@ export default function WriteRecord() {
                     </div>
                     <input type="submit" value="작성" />
                 </form>
-                {classNames[0]}
             </div>
             <style jsx>{`
                 #previewImages {
