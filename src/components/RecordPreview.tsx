@@ -16,20 +16,34 @@ export default function RecordPreview({ record }: Props) {
     const data = record.data();
 
     return (
-        <div className={styles.post}>
+        <>
             <Link href={`/record/${record.id}`}>
-                <div>
-                    <h1>{data.title}</h1>
-                    <article className={styles.content}>{data.content}</article>
-                    <i>by {data.userName}</i>
-                    {data.photoURL !== "" && (
-                        <Image
-                            src={data.photoURL}
-                            width="70"
-                            height="70"
-                            alt="userPhoto"
+                <div className={styles.post}>
+                    <div className={styles.imageWrapper}>
+                        <img
+                            src={
+                                data.thumbnail === undefined
+                                    ? "/assets/images/background.jpg"
+                                    : data.thumbnail
+                            }
+                            alt="thumbnail"
                         />
-                    )}
+                    </div>
+                    <div className={styles.contentContainer}>
+                        <h1>{data.title}</h1>
+                        <article className={styles.content}>
+                            {data.content}
+                        </article>
+                        <i>by {data.userName}</i>
+                        {data.photoURL !== "" && (
+                            <Image
+                                src={data.photoURL}
+                                width="70"
+                                height="70"
+                                alt="userPhoto"
+                            />
+                        )}
+                    </div>
                 </div>
             </Link>
             <style jsx>{`
@@ -37,6 +51,6 @@ export default function RecordPreview({ record }: Props) {
                     margin-right: 1rem;
                 }
             `}</style>
-        </div>
+        </>
     );
 }
