@@ -15,12 +15,12 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 
 const firebaseConfig = {
-    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+    apiKey: "AIzaSyCbRVuW_cmytgaWp2ag0r0r2Oi5n8Ds0zU",
+    authDomain: "hobby-us.firebaseapp.com",
+    projectId: "hobby-us",
+    storageBucket: "hobby-us.appspot.com",
+    messagingSenderId: "309055526504",
+    appId: "1:309055526504:web:852adb9875268b778a8ddd",
 };
 
 export const fbApp = initializeApp(firebaseConfig);
