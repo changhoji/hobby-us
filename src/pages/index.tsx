@@ -7,7 +7,7 @@ import { fbDB } from "./_app";
 export default function Home() {
     return (
         <>
-            <MainUpper text="" imageSrc="" />
+            <MainUpper />
             <MainRecord />
         </>
     );
